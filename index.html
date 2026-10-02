@@ -1,669 +1,134 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MATH OF CHAMPION — SPLDV</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math of Champion</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #eef2ff, #f8fafc);
-  color: #1e293b;
-}
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1e3a8a, #2563eb, #38bdf8);
+            color: white;
+            padding: 20px;
+        }
 
-header {
-  background: linear-gradient(135deg, #4338ca, #7c3aed);
-  color: white;
-  padding: 25px 15px;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,.15);
-}
+        .container {
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 45px 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            backdrop-filter: blur(10px);
+        }
 
-header h1 {
-  margin: 0;
-  font-size: 30px;
-}
+        .trophy {
+            font-size: 70px;
+            margin-bottom: 15px;
+        }
 
-header p {
-  margin: 8px 0 0;
-}
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-}
+        .subtitle {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
 
-.card {
-  background: white;
-  border-radius: 18px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 5px 18px rgba(0,0,0,.08);
-}
+        .description {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
 
-h2 {
-  margin-top: 0;
-}
+        .start-button {
+            display: inline-block;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            background: white;
+            color: #1e3a8a;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
 
-.groups {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
+        .start-button:hover {
+            transform: scale(1.05);
+        }
 
-.group {
-  padding: 12px;
-  border-radius: 12px;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-}
+        .footer {
+            margin-top: 30px;
+            font-size: 13px;
+            opacity: 0.8;
+        }
 
-.red { background:#ef4444; }
-.yellow { background:#eab308; color:#111827; }
-.pink { background:#ec4899; }
-.green { background:#22c55e; }
-.purple { background:#8b5cf6; }
-.orange { background:#f97316; }
-.blue { background:#3b82f6; }
-.brown { background:#92400e; }
-.gray { background:#64748b; }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 32px;
+            }
 
-button {
-  border: none;
-  border-radius: 10px;
-  padding: 11px 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 4px;
-}
+            .trophy {
+                font-size: 55px;
+            }
 
-.primary {
-  background:#4f46e5;
-  color:white;
-}
-
-.success {
-  background:#16a34a;
-  color:white;
-}
-
-.danger {
-  background:#dc2626;
-  color:white;
-}
-
-.secondary {
-  background:#e2e8f0;
-}
-
-#timer {
-  font-size: 25px;
-  font-weight: bold;
-  text-align: center;
-  margin: 10px;
-}
-
-.question-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 7px;
-}
-
-.question-btn {
-  background:#e2e8f0;
-  padding: 10px 4px;
-  margin: 0;
-}
-
-.question-btn:hover {
-  background:#c7d2fe;
-}
-
-.question-btn.used {
-  color:white;
-}
-
-.question-box {
-  display:none;
-  border: 2px solid #c7d2fe;
-  border-radius: 15px;
-  padding:20px;
-  margin-top:20px;
-  background:#f8fafc;
-}
-
-.question-text {
-  font-size:20px;
-  line-height:1.6;
-  font-weight:bold;
-}
-
-input, select {
-  width:100%;
-  padding:12px;
-  border:2px solid #cbd5e1;
-  border-radius:10px;
-  margin:8px 0;
-  font-size:16px;
-}
-
-.score-table {
-  width:100%;
-  border-collapse:collapse;
-}
-
-.score-table th,
-.score-table td {
-  border-bottom:1px solid #e2e8f0;
-  padding:10px;
-  text-align:left;
-}
-
-.message {
-  padding:12px;
-  border-radius:10px;
-  margin-top:10px;
-  display:none;
-}
-
-.correct {
-  background:#dcfce7;
-  color:#166534;
-}
-
-.wrong {
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-footer {
-  text-align:center;
-  padding:25px;
-  color:#64748b;
-}
-
-@media(max-width:700px) {
-  header h1 {
-    font-size:24px;
-  }
-
-  .groups {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .question-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-  .question-text {
-    font-size:17px;
-  }
-}
-</style>
+            .container {
+                padding: 35px 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-  <h1>🏆 MATH OF CHAMPION</h1>
-  <p>Permainan Matematika — Sistem Persamaan Linear Dua Variabel</p>
-</header>
+    <div class="container">
 
-<div class="container">
+        <div class="trophy">🏆</div>
 
-  <div class="card">
-    <h2>🎮 Pengaturan Permainan</h2>
+        <h1>MATH OF CHAMPION</h1>
 
-    <label>Pilih Kelompok:</label>
-    <select id="groupSelect">
-      <option>Merah</option>
-      <option>Kuning</option>
-      <option>Pink</option>
-      <option>Hijau</option>
-      <option>Ungu</option>
-      <option>Orange</option>
-      <option>Biru</option>
-      <option>Coklat</option>
-      <option>Abu-abu</option>
-    </select>
+        <div class="subtitle">
+            Interactive Mathematics Competition Game
+        </div>
 
-    <button class="primary" onclick="startGame()">▶ Mulai Permainan</button>
-    <button class="secondary" onclick="pauseGame()">⏸ Jeda</button>
-    <button class="danger" onclick="gameOver()">🏁 Game Over</button>
+        <div class="description">
+            Tantang kemampuan matematika kamu,
+            pecahkan soal, kumpulkan poin,
+            dan jadilah juara dalam Math of Champion!
+        </div>
 
-    <div id="timer">⏱ 20:00</div>
-  </div>
+        <button class="start-button" onclick="mulaiGame()">
+            MULAI PERMAINAN
+        </button>
 
-  <div class="card">
-    <h2>🏅 Kelompok</h2>
-
-    <div class="groups">
-      <div class="group red">Merah</div>
-      <div class="group yellow">Kuning</div>
-      <div class="group pink">Pink</div>
-      <div class="group green">Hijau</div>
-      <div class="group purple">Ungu</div>
-      <div class="group orange">Orange</div>
-      <div class="group blue">Biru</div>
-      <div class="group brown">Coklat</div>
-      <div class="group gray">Abu-abu</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>📚 Pilih Nomor Soal</h2>
-    <p>Pilih nomor soal yang akan dimainkan.</p>
-
-    <div id="questionGrid" class="question-grid"></div>
-
-    <div id="questionBox" class="question-box">
-
-      <div id="questionNumber"></div>
-
-      <div id="questionText" class="question-text"></div>
-
-      <input
-        type="number"
-        id="answerX"
-        placeholder="Masukkan nilai X">
-
-      <input
-        type="number"
-        id="answerY"
-        placeholder="Masukkan nilai Y">
-
-      <button class="success" onclick="checkAnswer()">
-        ✅ Periksa Jawaban
-      </button>
-
-      <div id="message" class="message"></div>
+        <div class="footer">
+            Mathematics Competition • Math of Champion
+        </div>
 
     </div>
-  </div>
 
-  <div class="card">
-    <h2>📊 Papan Skor</h2>
-
-    <table class="score-table">
-      <thead>
-        <tr>
-          <th>Kelompok</th>
-          <th>Skor</th>
-        </tr>
-      </thead>
-
-      <tbody id="scoreBoard"></tbody>
-    </table>
-  </div>
-
-</div>
-
-<footer>
-  MATH OF CHAMPION — SPLDV<br>
-  PKBM Mulya Abadi • Tahun Ajaran 2026/2027
-</footer>
-
-<script>
-
-/* =========================
-   DATA KELOMPOK
-========================= */
-
-const groups = [
-  "Merah",
-  "Kuning",
-  "Pink",
-  "Hijau",
-  "Ungu",
-  "Orange",
-  "Biru",
-  "Coklat",
-  "Abu-abu"
-];
-
-let scores = {};
-
-groups.forEach(group => {
-  scores[group] = 0;
-});
-
-
-/* =========================
-   DATA SOAL
-========================= */
-
-let questions = [];
-
-/*
-   Membuat 120 soal SPLDV.
-   Setiap soal memiliki jawaban yang
-   dihitung otomatis oleh sistem.
-*/
-
-function createQuestions() {
-
-  for(let i = 1; i <= 120; i++) {
-
-    let x;
-    let y;
-
-    /*
-      Nilai dibuat bervariasi tetapi tetap
-      menghasilkan bilangan bulat.
-    */
-
-    x = (i % 15) + 1;
-    y = ((i * 2) % 12) + 1;
-
-    let a = 2 + (i % 5);
-    let b = 1 + (i % 4);
-    let c = a * x + b * y;
-
-    let d = 1 + (i % 3);
-    let e = 2 + (i % 5);
-    let f = d * x + e * y;
-
-    questions.push({
-      number: i,
-      x: x,
-      y: y,
-      eq1: `${a}x + ${b}y = ${c}`,
-      eq2: `${d}x + ${e}y = ${f}`,
-      points: i <= 40 ? 20 : (i <= 80 ? 30 : 40),
-      used: false
-    });
-  }
-
-}
-
-createQuestions();
-
-
-/* =========================
-   TAMPILKAN NOMOR SOAL
-========================= */
-
-function renderQuestions() {
-
-  const grid = document.getElementById("questionGrid");
-
-  grid.innerHTML = "";
-
-  questions.forEach(q => {
-
-    const button = document.createElement("button");
-
-    button.className = "question-btn";
-    button.textContent = q.number;
-
-    button.onclick = function() {
-      showQuestion(q.number);
-    };
-
-    grid.appendChild(button);
-
-  });
-
-}
-
-renderQuestions();
-
-
-/* =========================
-   TAMPILKAN PAPAN SKOR
-========================= */
-
-function renderScores() {
-
-  const board = document.getElementById("scoreBoard");
-
-  board.innerHTML = "";
-
-  groups.forEach(group => {
-
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
-      <td>${group}</td>
-      <td><strong>${scores[group]}</strong></td>
-    `;
-
-    board.appendChild(row);
-
-  });
-
-}
-
-renderScores();
-
-
-/* =========================
-   PILIH SOAL
-========================= */
-
-let currentQuestion = null;
-
-function showQuestion(number) {
-
-  const q = questions[number - 1];
-
-  if(q.used) {
-    alert("Soal ini sudah digunakan.");
-    return;
-  }
-
-  currentQuestion = q;
-
-  document.getElementById("questionBox").style.display = "block";
-
-  document.getElementById("questionNumber").innerHTML =
-    `<strong>Soal ${q.number}</strong> — ${q.points} poin`;
-
-  document.getElementById("questionText").innerHTML =
-    `Tentukan nilai <strong>x</strong> dan <strong>y</strong>:<br><br>
-     ${q.eq1}<br>
-     ${q.eq2}`;
-
-  document.getElementById("answerX").value = "";
-  document.getElementById("answerY").value = "";
-
-  document.getElementById("message").style.display = "none";
-
-}
-
-
-/* =========================
-   PERIKSA JAWABAN
-========================= */
-
-function checkAnswer() {
-
-  if(!currentQuestion) {
-    alert("Silakan pilih soal terlebih dahulu.");
-    return;
-  }
-
-  const x = Number(document.getElementById("answerX").value);
-  const y = Number(document.getElementById("answerY").value);
-
-  const message = document.getElementById("message");
-
-  message.style.display = "block";
-
-  if(
-    x === currentQuestion.x &&
-    y === currentQuestion.y
-  ) {
-
-    const group =
-      document.getElementById("groupSelect").value;
-
-    scores[group] += currentQuestion.points;
-
-    currentQuestion.used = true;
-
-    message.className = "message correct";
-
-    message.innerHTML =
-      `🎉 Jawaban benar! <strong>+${currentQuestion.points} poin</strong> untuk kelompok ${group}.`;
-
-    markQuestionUsed(currentQuestion.number);
-
-    renderScores();
-
-  } else {
-
-    message.className = "message wrong";
-
-    message.innerHTML =
-      "❌ Jawaban belum tepat. Silakan periksa kembali.";
-
-  }
-
-}
-
-
-/* =========================
-   WARNA SOAL YANG SUDAH DIPAKAI
-========================= */
-
-function markQuestionUsed(number) {
-
-  const buttons =
-    document.querySelectorAll(".question-btn");
-
-  const button = buttons[number - 1];
-
-  button.classList.add("used");
-
-  const group =
-    document.getElementById("groupSelect").value;
-
-  const colors = {
-    "Merah":"#ef4444",
-    "Kuning":"#eab308",
-    "Pink":"#ec4899",
-    "Hijau":"#22c55e",
-    "Ungu":"#8b5cf6",
-    "Orange":"#f97316",
-    "Biru":"#3b82f6",
-    "Coklat":"#92400e",
-    "Abu-abu":"#64748b"
-  };
-
-  button.style.background = colors[group];
-
-  if(group === "Kuning") {
-    button.style.color = "#111827";
-  } else {
-    button.style.color = "white";
-  }
-
-}
-
-
-/* =========================
-   TIMER
-========================= */
-
-let timeLeft = 20 * 60;
-let timer = null;
-let running = false;
-
-function updateTimer() {
-
-  const minutes =
-    Math.floor(timeLeft / 60);
-
-  const seconds =
-    timeLeft % 60;
-
-  document.getElementById("timer").textContent =
-    `⏱ ${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
-
-}
-
-
-function startGame() {
-
-  if(running) return;
-
-  running = true;
-
-  timer = setInterval(() => {
-
-    if(timeLeft <= 0) {
-
-      clearInterval(timer);
-      running = false;
-
-      alert("⏰ Waktu permainan telah habis!");
-
-      return;
-    }
-
-    timeLeft--;
-
-    updateTimer();
-
-  },1000);
-
-}
-
-
-function pauseGame() {
-
-  clearInterval(timer);
-
-  running = false;
-
-}
-
-
-function gameOver() {
-
-  clearInterval(timer);
-
-  running = false;
-
-  showFinalScores();
-
-}
-
-
-/* =========================
-   HASIL AKHIR
-========================= */
-
-function showFinalScores() {
-
-  let result = "";
-
-  groups.forEach(group => {
-
-    result +=
-      `${group}: ${scores[group]} poin\n`;
-
-  });
-
-  alert(
-    "🏆 HASIL AKHIR MATH OF CHAMPION\n\n" +
-    result
-  );
-
-}
-
-updateTimer();
-
-</script>
+    <script>
+        function mulaiGame() {
+            alert("Selamat datang di Math of Champion! Permainan akan segera dimulai.");
+        }
+    </script>
 
 </body>
-  </html>
+</html>
