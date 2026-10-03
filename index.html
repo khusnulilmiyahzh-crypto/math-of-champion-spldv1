@@ -114,9 +114,27 @@
             dan jadilah juara dalam Math of Champion!
         </div>
 
-        <button class="start-button" onclick="mulaiGame()">
-            MULAI PERMAINAN
-        </button>
+        <div id="playerForm" style="margin-top: 20px;">
+
+    <input
+        type="text"
+        id="playerName"
+        placeholder="Masukkan nama kamu"
+        style="width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 12px; border: none; font-size: 16px;"
+    >
+
+    <input
+        type="text"
+        id="playerClass"
+        placeholder="Masukkan kelas kamu"
+        style="width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: none; font-size: 16px;"
+    >
+
+    <button class="start-button" onclick="mulaiGame()">
+        MULAI PERMAINAN
+    </button>
+
+        </div>
 
         <div class="footer">
             Mathematics Competition • Math of Champion
@@ -126,6 +144,18 @@
 
     <script>
         function mulaiGame() {
+
+    const name = document.getElementById("playerName").value.trim();
+    const playerClass = document.getElementById("playerClass").value.trim();
+
+    if (name === "" || playerClass === "") {
+        alert("Silakan isi nama dan kelas terlebih dahulu.");
+        return;
+    }
+
+    localStorage.setItem("playerName", name);
+    localStorage.setItem("playerClass", playerClass);
+
     window.location.href = "game.html";
         }
     </script>
