@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pilih Level - Math of Champion</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+            margin-bottom: 35px;
+        }
+
+        .levels {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .level-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px 20px;
+            transition: 0.3s;
+        }
+
+        .level-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .level-card h2 {
+            margin-bottom: 10px;
+        }
+
+        .level-card p {
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background: white;
+            color: #1e3a8a;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 700px) {
+            .levels {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🏆 PILIH LEVEL</h1>
+
+        <p class="subtitle">
+            Pilih tingkat tantangan yang ingin kamu mainkan
+        </p>
+
+        <div class="levels">
+
+            <!-- LEVEL 1 -->
+            <div class="level-card">
+                <div class="icon">🟢</div>
+
+                <h2>Level 1</h2>
+
+                <p>
+                    Pemanasan<br>
+                    Setiap jawaban benar = <b>20 poin</b>
+                </p>
+
+                <button onclick="pilihLevel(1, 20)">
+                    MULAI LEVEL 1
+                </button>
+            </div>
+
+
+            <!-- LEVEL 2 -->
+            <div class="level-card">
+                <div class="icon">🟡</div>
+
+                <h2>Level 2</h2>
+
+                <p>
+                    Tantangan<br>
+                    Setiap jawaban benar = <b>30 poin</b>
+                </p>
+
+                <button onclick="pilihLevel(2, 30)">
+                    MULAI LEVEL 2
+                </button>
+            </div>
+
+
+            <!-- LEVEL 3 -->
+            <div class="level-card">
+                <div class="icon">🔴</div>
+
+                <h2>Level 3</h2>
+
+                <p>
+                    Champion<br>
+                    Setiap jawaban benar = <b>40 poin</b>
+                </p>
+
+                <button onclick="pilihLevel(3, 40)">
+                    MULAI LEVEL 3
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function pilihLevel(level, points) {
+
+            localStorage.setItem("gameLevel", "Level " + level);
+
+            localStorage.setItem(
+                "pointsPerQuestion",
+                points
+            );
+
+            window.location.href = "game.html";
+        }
+
+    </script>
+
+</body>
+</html>
