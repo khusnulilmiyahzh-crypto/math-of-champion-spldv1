@@ -233,39 +233,112 @@
 
 <script>
 
-const questions = [
+const questionsByLevel = {
 
-    {
-        question: "Jika x + y = 10 dan x - y = 2, berapakah nilai x?",
-        options: ["4", "5", "6", "8"],
-        answer: 2
-    },
+    1: [
+        {
+            question: "Jika x + y = 10 dan x - y = 2, berapakah nilai x?",
+            options: ["4", "5", "6", "8"],
+            answer: 2
+        },
 
-    {
-        question: "Jika x + y = 12 dan x - y = 4, berapakah nilai y?",
-        options: ["2", "4", "6", "8"],
-        answer: 1
-    },
+        {
+            question: "Jika x + y = 12 dan x - y = 4, berapakah nilai y?",
+            options: ["2", "4", "6", "8"],
+            answer: 1
+        },
 
-    {
-        question: "Diketahui 2x + y = 10 dan x + y = 7. Nilai x adalah...",
-        options: ["2", "3", "4", "5"],
-        answer: 1
-    },
+        {
+            question: "Diketahui 2x + y = 10 dan x + y = 7. Nilai x adalah...",
+            options: ["2", "3", "4", "5"],
+            answer: 1
+        },
 
-    {
-        question: "Diketahui x + 2y = 8 dan x + y = 5. Nilai y adalah...",
-        options: ["1", "2", "3", "4"],
-        answer: 2
-    },
+        {
+            question: "Diketahui x + 2y = 8 dan x + y = 5. Nilai y adalah...",
+            options: ["1", "2", "3", "4"],
+            answer: 2
+        },
 
-    {
-        question: "Jika 2x + y = 11 dan x + y = 7, maka nilai x + y adalah...",
-        options: ["5", "6", "7", "8"],
-        answer: 2
-    }
+        {
+            question: "Jika 2x + y = 11 dan x + y = 7, maka nilai x + y adalah...",
+            options: ["5", "6", "7", "8"],
+            answer: 2
+        }
+    ],
 
-];
+
+    2: [
+        {
+            question: "Jika 2x + 3y = 13 dan x + y = 5, berapakah nilai x?",
+            options: ["1", "2", "3", "4"],
+            answer: 1
+        },
+
+        {
+            question: "Jika 3x + 2y = 16 dan x + y = 6, berapakah nilai y?",
+            options: ["1", "2", "3", "4"],
+            answer: 2
+        },
+
+        {
+            question: "Diketahui 2x - y = 7 dan x + y = 5. Nilai x adalah...",
+            options: ["3", "4", "5", "6"],
+            answer: 1
+        },
+
+        {
+            question: "Jika x + 2y = 11 dan 2x - y = 7, nilai y adalah...",
+            options: ["2", "3", "4", "5"],
+            answer: 1
+        },
+
+        {
+            question: "Diketahui 3x + y = 14 dan x + y = 6. Nilai x + y adalah...",
+            options: ["5", "6", "7", "8"],
+            answer: 1
+        }
+    ],
+
+
+    3: [
+        {
+            question: "Jika 2x + 3y = 19 dan 3x - y = 9, nilai x adalah...",
+            options: ["3", "4", "5", "6"],
+            answer: 1
+        },
+
+        {
+            question: "Diketahui 4x + 3y = 24 dan 2x - y = 2. Nilai y adalah...",
+            options: ["2", "3", "4", "5"],
+            answer: 1
+        },
+
+        {
+            question: "Jika 3x + 2y = 18 dan 2x - 3y = -1, nilai x adalah...",
+            options: ["2", "3", "4", "5"],
+            answer: 1
+        },
+
+        {
+            question: "Diketahui x + 2y = 14 dan 3x - y = 13. Nilai x adalah...",
+            options: ["4", "5", "6", "7"],
+            answer: 1
+        },
+
+        {
+            question: "Jika 2x + 5y = 24 dan 3x - 2y = 5, nilai x + y adalah...",
+            options: ["6", "7", "8", "9"],
+            answer: 1
+        }
+    ]
+
+};
+
+const selectedLevel =
+    Number(localStorage.getItem("gameLevel")?.replace("Level ", "")) || 1;
+
+const questions = questionsByLevel[selectedLevel];
 
 let currentQuestion = 0;
 let score = 0;
