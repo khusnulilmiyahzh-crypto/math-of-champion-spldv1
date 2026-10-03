@@ -271,7 +271,8 @@ let currentQuestion = 0;
 let score = 0;
 let timeLeft = 60;
 let timer;
-
+const pointsPerQuestion =
+    Number(localStorage.getItem("pointsPerQuestion
 const questionElement = document.getElementById("question");
 const optionsElement = document.getElementById("options");
 const questionNumberElement = document.getElementById("questionNumber");
@@ -333,11 +334,14 @@ function checkAnswer(button, selectedIndex) {
         option.disabled = true;
     });
 
-    if (selectedIndex === correctIndex) {
+    if (selected === questions[currentQuestion].answer) {
+    score += pointsPerQuestion;
+    document.getElementById("score").textContent = score;
+    }
 
         button.classList.add("correct");
 
-        score += 20;
+        score += pointsPerQuestion;
         scoreElement.textContent = score;
 
     } else {
