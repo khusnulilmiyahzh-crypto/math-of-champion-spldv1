@@ -360,18 +360,52 @@ function loadQuestion() {
     timeLeft = 60;
     timerElement.textContent = timeLeft;
 
+    const current = questions[currentQuestion];
+
+    questionNumberElement.textContent =
+        "Soal " + (currentQuestion + 1) + " dari " + questions.length;
+
+    questionElement.textContent = current.question;
+
+    optionsContainer.innerHTML = "";
+
+    current.options.forEach((option, index) => {
+
+        const button = document.createElement("button");
+
+        button.textContent = option;
+
+        button.className = "option";
+
+        button.onclick = function() {
+            checkAnswer(index);
+        };
+
+        optionsContainer.appendChild(button);
+
+    });
+
+    nextButton.style.display = "none";
+
     timer = setInterval(() => {
 
         timeLeft--;
+
         timerElement.textContent = timeLeft;
 
         if (timeLeft <= 0) {
+
             clearInterval(timer);
+
             disableOptions();
+
             nextButton.style.display = "block";
+
         }
 
     }, 1000);
+}
+
 
     const current = questions[currentQuestion];
 
